@@ -1,0 +1,51 @@
+@page
+@model Zenestudio.Pages.Eloadok.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Eloado</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Eloado.Id" />
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Eloado.Nev" class="control-label"></label>
+                <input asp-for="Eloado.Nev" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Eloado.Nev" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Eloado.Muvesznev" class="control-label"></label>
+                <input asp-for="Eloado.Muvesznev" class="form-control" />
+                <span asp-validation-for="Eloado.Muvesznev" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Eloado.Email" class="control-label"></label>
+                <input asp-for="Eloado.Email" class="form-control" />
+                <span asp-validation-for="Eloado.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Eloado.Projektek" class="control-label"></label>
+                <input asp-for="Eloado.Projektek" class="form-control" />
+                <span asp-validation-for="Eloado.Projektek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

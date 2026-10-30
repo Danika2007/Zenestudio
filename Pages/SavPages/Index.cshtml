@@ -1,0 +1,75 @@
+@page
+@model Zenestudio.Pages.Savok.IndexModel
+
+@{
+    ViewData["Title"] = "Hangsávok";
+}
+
+<div class="page-heading">
+    <div>
+        <div class="page-eyebrow">STUDIO / HANGSÁVOK</div>
+        <h1>Hangsávok</h1>
+        <p>A projektekhez tartozó hangsávok kezelése.</p>
+    </div>
+
+    <a asp-page="Create" class="btn btn-primary">
+        Új hangsáv
+    </a>
+</div>
+
+<div class="content-panel">
+    <div class="panel-heading">
+        <h2>Hangsávok listája</h2>
+        <span class="panel-count">
+            @Model.Sav.Count hangsáv
+        </span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Hangsáv neve</th>
+                    <th>Projekt</th>
+                    <th>Hangszer</th>
+                    <th>Hossz</th>
+                    <th class="text-end">Műveletek</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Sav)
+                {
+                    <tr>
+                        <td class="fw-semibold">@item.SavNev</td>
+                        <td>@(item.Projekt?.Cim ?? "—")</td>
+                        <td>@(item.Hangszer ?? "—")</td>
+                        <td>@item.HosszMasodperc mp</td>
+                        <td class="text-end">
+                            <a asp-page="Edit"
+                               asp-route-id="@item.Id"
+                               class="table-action">Szerkesztés</a>
+
+                            <a asp-page="Details"
+                               asp-route-id="@item.Id"
+                               class="table-action">Részletek</a>
+
+                            <a asp-page="Delete"
+                               asp-route-id="@item.Id"
+                               class="table-action danger-action">Törlés</a>
+                        </td>
+                    </tr>
+                }
+
+                @if (!Model.Sav.Any())
+                {
+                    <tr>
+                        <td colspan="5" class="empty-state">
+                            Még nem tartozik hangsáv egyetlen projekthez sem.
+                            <a asp-page="Create">Első hangsáv hozzáadása</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

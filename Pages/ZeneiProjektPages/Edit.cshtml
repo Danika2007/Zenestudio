@@ -1,0 +1,73 @@
+@page
+@model Zenestudio.Pages.ZeneiProjektPages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ZeneiProjekt</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ZeneiProjekt.Id" />
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ZeneiProjekt.Cim" class="control-label"></label>
+                <input asp-for="ZeneiProjekt.Cim" class="form-control" aria-required="true"/>
+                <span asp-validation-for="ZeneiProjekt.Cim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZeneiProjekt.EloadoId" class="control-label"></label>
+                <input asp-for="ZeneiProjekt.EloadoId" class="form-control" />
+                <span asp-validation-for="ZeneiProjekt.EloadoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZeneiProjekt.Eloado" class="control-label"></label>
+                <input asp-for="ZeneiProjekt.Eloado" class="form-control" />
+                <span asp-validation-for="ZeneiProjekt.Eloado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ZeneiProjekt.Stilus" class="control-label"></label>
+                <input asp-for="ZeneiProjekt.Stilus" class="form-control" aria-required="true"/>
+                <span asp-validation-for="ZeneiProjekt.Stilus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZeneiProjekt.BPM" class="control-label"></label>
+                <input asp-for="ZeneiProjekt.BPM" class="form-control" />
+                <span asp-validation-for="ZeneiProjekt.BPM" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="ZeneiProjekt.Statusz" class="control-label"></label>
+                <input asp-for="ZeneiProjekt.Statusz" class="form-control" aria-required="true"/>
+                <span asp-validation-for="ZeneiProjekt.Statusz" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZeneiProjekt.LetrehozasDatum" class="control-label"></label>
+                <input asp-for="ZeneiProjekt.LetrehozasDatum" class="form-control" />
+                <span asp-validation-for="ZeneiProjekt.LetrehozasDatum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZeneiProjekt.Savok" class="control-label"></label>
+                <input asp-for="ZeneiProjekt.Savok" class="form-control" />
+                <span asp-validation-for="ZeneiProjekt.Savok" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

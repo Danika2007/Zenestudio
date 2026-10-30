@@ -1,0 +1,72 @@
+@page
+@model Zenestudio.Pages.Projektek.CreateModel
+
+@{
+    ViewData["Title"] = "Új zenei projekt";
+}
+
+<h1>🎵 Új zenei projekt</h1>
+
+<form method="post">
+    <div asp-validation-summary="All"
+         class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="ZeneiProjekt.Cim"
+               class="form-label">Projekt címe</label>
+        <input asp-for="ZeneiProjekt.Cim"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ZeneiProjekt.EloadoId"
+               class="form-label">Előadó</label>
+
+        <select asp-for="ZeneiProjekt.EloadoId"
+                asp-items="Model.EloadokLista"
+                class="form-select">
+            <option value="0">-- Válassz előadót --</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ZeneiProjekt.Stilus"
+               class="form-label">Műfaj</label>
+        <input asp-for="ZeneiProjekt.Stilus"
+               class="form-control"
+               placeholder="Trap, Hip-Hop, R&B..." />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ZeneiProjekt.BPM"
+               class="form-label">BPM</label>
+        <input asp-for="ZeneiProjekt.BPM"
+               type="number" min="40" max="250"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ZeneiProjekt.Statusz"
+               class="form-label">Státusz</label>
+        <select asp-for="ZeneiProjekt.Statusz"
+                class="form-select">
+            <option value="Ötlet">Ötlet</option>
+            <option value="Folyamatban">Folyamatban</option>
+            <option value="Keverés">Keverés</option>
+            <option value="Masterelés">Masterelés</option>
+            <option value="Kész">Kész</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Projekt mentése
+    </button>
+
+    <a asp-page="Index" class="btn btn-secondary">
+        Vissza
+    </a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

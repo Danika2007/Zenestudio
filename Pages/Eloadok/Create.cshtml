@@ -1,0 +1,52 @@
+@page
+@model Zenestudio.Pages.Eloadok.CreateModel
+
+@{
+    ViewData["Title"] = "Új előadó";
+}
+
+<h1>🎤 Új előadó felvétele</h1>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Eloado.Nev" class="form-label">
+            Név
+        </label>
+        <input asp-for="Eloado.Nev" class="form-control" />
+        <span asp-validation-for="Eloado.Nev"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Eloado.Muvesznev" class="form-label">
+            Művésznév
+        </label>
+        <input asp-for="Eloado.Muvesznev"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Eloado.Email" class="form-label">
+            Email
+        </label>
+        <input asp-for="Eloado.Email"
+               class="form-control" />
+        <span asp-validation-for="Eloado.Email"
+              class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Mentés
+    </button>
+
+    <a asp-page="Index" class="btn btn-secondary">
+        Vissza
+    </a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

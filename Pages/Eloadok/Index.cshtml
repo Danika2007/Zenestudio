@@ -1,0 +1,73 @@
+@page
+@model Zenestudio.Pages.Eloadok.IndexModel
+
+@{
+    ViewData["Title"] = "Előadók";
+}
+
+<div class="page-heading">
+    <div>
+        <div class="page-eyebrow">STUDIO / ELŐADÓK</div>
+        <h1>Előadók</h1>
+        <p>A stúdióhoz tartozó előadók nyilvántartása.</p>
+    </div>
+
+    <a asp-page="Create" class="btn btn-primary">
+        Új előadó
+    </a>
+</div>
+
+<div class="content-panel">
+    <div class="panel-heading">
+        <h2>Előadók listája</h2>
+        <span class="panel-count">
+            @Model.Eloadok.Count előadó
+        </span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Név</th>
+                    <th>Művésznév</th>
+                    <th>Email</th>
+                    <th class="text-end">Műveletek</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Eloadok)
+                {
+                    <tr>
+                        <td class="fw-semibold">@item.Nev</td>
+                        <td>@(item.Muvesznev ?? "—")</td>
+                        <td>@(item.Email ?? "—")</td>
+                        <td class="text-end">
+                            <a asp-page="Edit"
+                               asp-route-id="@item.Id"
+                               class="table-action">Szerkesztés</a>
+
+                            <a asp-page="Details"
+                               asp-route-id="@item.Id"
+                               class="table-action">Részletek</a>
+
+                            <a asp-page="Delete"
+                               asp-route-id="@item.Id"
+                               class="table-action danger-action">Törlés</a>
+                        </td>
+                    </tr>
+                }
+
+                @if (!Model.Eloadok.Any())
+                {
+                    <tr>
+                        <td colspan="4" class="empty-state">
+                            Még nincs rögzített előadó.
+                            <a asp-page="Create">Első előadó hozzáadása</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

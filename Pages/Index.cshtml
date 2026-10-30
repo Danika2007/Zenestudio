@@ -1,10 +1,155 @@
 ﻿@page
-@model IndexModel
+@model Zenestudio.Pages.IndexModel
+
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Áttekintés";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="page-heading">
+    <div>
+        <div class="page-eyebrow">STUDIO / ÁTTEKINTÉS</div>
+        <h1>Áttekintés</h1>
+        <p>A stúdió aktuális adatai és legutóbbi projektjei.</p>
+    </div>
+
+    <a asp-page="/Projektek/Create" class="btn btn-primary">
+        Új projekt
+    </a>
+</div>
+
+<div class="row g-3 mb-4">
+
+    <div class="col-6 col-lg-3">
+        <div class="stat-card">
+            <div class="stat-label">ELŐADÓK</div>
+            <div class="stat-number">@Model.EloadokSzama</div>
+            <a asp-page="/Eloadok/Index" class="stat-link">
+                Összes előadó
+            </a>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="stat-card">
+            <div class="stat-label">PROJEKTEK</div>
+            <div class="stat-number">@Model.ProjektekSzama</div>
+            <a asp-page="/Projektek/Index" class="stat-link">
+                Összes projekt
+            </a>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="stat-card">
+            <div class="stat-label">HANGSÁVOK</div>
+            <div class="stat-number">@Model.SavokSzama</div>
+            <a asp-page="/Savok/Index" class="stat-link">
+                Összes hangsáv
+            </a>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="stat-card">
+            <div class="stat-label">BEFEJEZETT PROJEKTEK</div>
+            <div class="stat-number">@Model.KeszProjektekSzama</div>
+            <a asp-page="/Projektek/Index"
+               asp-route-Statusz="Kész"
+               class="stat-link">
+                Befejezett projektek
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<div class="content-panel mb-4">
+
+    <div class="panel-heading">
+        <h2>Legutóbbi projektek</h2>
+
+        <a asp-page="/Projektek/Index" class="table-action">
+            Összes projekt
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Projekt</th>
+                    <th>Előadó</th>
+                    <th>Stílus</th>
+                    <th>BPM</th>
+                    <th>Státusz</th>
+                    <th class="text-end">Műveletek</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var projekt in Model.LegutobbiProjektek)
+                {
+                    <tr>
+                        <td class="fw-semibold">@projekt.Cim</td>
+                        <td>@(projekt.Eloado?.Nev ?? "—")</td>
+                        <td>@projekt.Stilus</td>
+                        <td>@projekt.BPM</td>
+                        <td>
+                            <span class="studio-status">
+                                @projekt.Statusz
+                            </span>
+                        </td>
+                        <td class="text-end">
+                            <a asp-page="/Projektek/Details"
+                               asp-route-id="@projekt.Id"
+                               class="table-action">
+                                Részletek
+                            </a>
+
+                            <a asp-page="/Projektek/Edit"
+                               asp-route-id="@projekt.Id"
+                               class="table-action">
+                                Szerkesztés
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+                @if (!Model.LegutobbiProjektek.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="empty-state">
+                            Még nincs rögzített projekt.
+                            <a asp-page="/Projektek/Create">
+                                Első projekt létrehozása
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="content-panel">
+    <div class="panel-heading">
+        <h2>Gyorsműveletek</h2>
+    </div>
+
+    <div class="p-3 d-flex flex-wrap gap-2">
+        <a asp-page="/Eloadok/Create"
+           class="btn btn-secondary">
+            Új előadó
+        </a>
+
+        <a asp-page="/ZeneiProjektPages/Create"
+           class="btn btn-secondary">
+            Új projekt
+        </a>
+
+        <a asp-page="/SavPages/Create"
+           class="btn btn-secondary">
+            Új hangsáv
+        </a>
+    </div>
 </div>

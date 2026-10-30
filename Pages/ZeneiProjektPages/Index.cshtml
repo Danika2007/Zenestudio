@@ -1,0 +1,129 @@
+@page
+@model Zenestudio.Pages.Projektek.IndexModel
+
+@{
+    ViewData["Title"] = "Projektek";
+}
+
+<div class="page-heading">
+    <div>
+        <div class="page-eyebrow">STUDIO / PROJEKTEK</div>
+        <h1>Zenei projektek</h1>
+        <p>A stúdió zenei projektjeinek kezelése.</p>
+    </div>
+
+    <a asp-page="Create" class="btn btn-primary">
+        Új projekt
+    </a>
+</div>
+
+<div class="content-panel">
+
+    <div class="panel-heading">
+        <h2>Projektek listája</h2>
+    </div>
+
+    <div class="p-3 border-bottom"
+         style="border-color:#30383f !important;">
+
+        <form method="get" class="row g-2 align-items-end">
+
+            <div class="col-md-5">
+                <label class="form-label">Keresés</label>
+                <input type="text"
+                       name="Kereses"
+                       value="@Model.Kereses"
+                       class="form-control"
+                       placeholder="Projekt címe..." />
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Státusz</label>
+                <select name="Statusz"
+                        class="form-select">
+                    <option value="">Összes státusz</option>
+                    @foreach (var statusz in new[]
+                    {
+                        "Ötlet", "Folyamatban",
+                        "Keverés", "Masterelés", "Kész"
+                    })
+                    {
+                        if (Model.Statusz == statusz)
+                        {
+                            <option value="@statusz" selected>
+                                @statusz
+                            </option>
+                        }
+                        else
+                        {
+                            <option value="@statusz">
+                                @statusz
+                            </option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3 d-flex gap-2">
+                <button type="submit"
+                        class="btn btn-primary">
+                    Szűrés
+                </button>
+
+                <a asp-page="Index"
+                   class="btn btn-secondary">
+                    Törlés
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Projekt címe</th>
+                    <th>Előadó</th>
+                    <th>Stílus</th>
+                    <th>BPM</th>
+                    <th>Státusz</th>
+                    <th class="text-end">Műveletek</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ZeneiProjekt)
+                {
+                    <tr>
+                        <td class="fw-semibold">@item.Cim</td>
+                        <td>@(item.Eloado?.Nev ?? "—")</td>
+                        <td>@item.Stilus</td>
+                        <td>@item.BPM</td>
+                        <td>@item.Statusz</td>
+                        <td class="text-end">
+                            <a asp-page="Edit"
+                               asp-route-id="@item.Id"
+                               class="table-action">Szerkesztés</a>
+
+                            <a asp-page="Details"
+                               asp-route-id="@item.Id"
+                               class="table-action">Részletek</a>
+
+                            <a asp-page="Delete"
+                               asp-route-id="@item.Id"
+                               class="table-action danger-action">Törlés</a>
+                        </td>
+                    </tr>
+                }
+
+                @if (!Model.ZeneiProjekt.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="empty-state">
+                            Nincs a keresésnek megfelelő projekt.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

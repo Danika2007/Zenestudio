@@ -1,0 +1,56 @@
+@page
+@model Zenestudio.Pages.Savok.CreateModel
+
+@{
+    ViewData["Title"] = "Új hangsáv";
+}
+
+<h1>🎹 Új hangsáv hozzáadása</h1>
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Sav.ProjektId">Zenei projekt</label>
+        <select asp-for="Sav.ProjektId"
+                asp-items="Model.ProjektekLista"
+                class="form-select">
+            <option value="0">-- Válassz projektet --</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Sav.SavNev">Hangsáv neve</label>
+        <input asp-for="Sav.SavNev" class="form-control" />
+        <span asp-validation-for="Sav.SavNev"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Sav.Hangszer">Hangszer</label>
+        <input asp-for="Sav.Hangszer"
+               class="form-control"
+               placeholder="Zongora, Dob, Basszus..." />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Sav.HosszMasodperc">Hossz (másodperc)</label>
+        <input asp-for="Sav.HosszMasodperc"
+               type="number" min="1" max="3600"
+               class="form-control" />
+        <span asp-validation-for="Sav.HosszMasodperc"
+              class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Hangsáv mentése
+    </button>
+
+    <a asp-page="Index" class="btn btn-secondary">
+        Vissza
+    </a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
