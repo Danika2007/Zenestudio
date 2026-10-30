@@ -10,17 +10,14 @@ namespace Zenestudio
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Adatbázis kapcsolat
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(
                     builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // Razor Pages szolgáltatás
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
 
-            // Hibakezelés
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
